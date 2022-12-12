@@ -12,4 +12,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     console.log()
   }
+
+  getToken() {
+    return !!localStorage.getItem('token')
+  }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import { NavigationEnd, Router } from '@angular/router'
 import { FormDialogComponent } from './core/components/form-dialog/form-dialog.component'
 
 @Component({
@@ -11,9 +12,18 @@ import { FormDialogComponent } from './core/components/form-dialog/form-dialog.c
 export class AppComponent {
   title = 'angular-demo'
 
+  isLoginOrHome = false
+
   constructor(
     public dialog: MatDialog,
-  ) {}
+    private router: Router,
+  ) {
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        this.isLoginOrHome = event.url === '/login' || event.url === '/home'
+      }
+    })
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(FormDialogComponent, {
