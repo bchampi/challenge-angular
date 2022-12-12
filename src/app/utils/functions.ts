@@ -1,4 +1,14 @@
 import { AbstractControl } from '@angular/forms'
+import { ErrorsDictionary } from '../core/components/input-form-error/error.dict'
+
+export const messageError: ErrorsDictionary = {
+  0: 'Hubo un error en obtener respuesta. Intentelo más tarde.',
+  400: 'Bad Request',
+  401: 'Las credenciales ingresadas son incorrectas. Intentelo nuevamente.',
+  403: 'Forbidden',
+  404: 'Not Found',
+  505: 'Internal Server Error',
+}
 
 export const validControlCustomInput = (control: AbstractControl) => {
   if (control.invalid && (control.dirty || control.touched)) {

@@ -12,13 +12,13 @@ import { FormDialogComponent } from './core/components/form-dialog/form-dialog.c
 export class AppComponent {
   title = 'angular-demo'
 
-  isLoginOrHome = false
+  isLoginOrHome = true
 
   constructor(
     public dialog: MatDialog,
     private router: Router,
   ) {
-    this.router.events.subscribe((event: any) => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isLoginOrHome = event.url === '/login' || event.url === '/home'
       }

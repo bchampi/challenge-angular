@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core'
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms'
+import { Component } from '@angular/core'
+import {
+  AbstractControl, NonNullableFormBuilder, Validators,
+} from '@angular/forms'
 import { AuthService } from 'src/app/core/services/Auth.service'
 import { validControlCustomInput } from 'src/app/utils/functions'
 
@@ -9,7 +11,7 @@ import { validControlCustomInput } from 'src/app/utils/functions'
   styleUrls: ['./auth.component.scss'],
 })
 
-export class AuthComponent implements OnInit {
+export class AuthComponent {
   formLogin = this.fb.group({
     email: ['', [Validators.email, Validators.required]],
     password: ['', Validators.required],
@@ -26,23 +28,17 @@ export class AuthComponent implements OnInit {
   }
 
   constructor(
-    private fb: FormBuilder,
+    private fb: NonNullableFormBuilder,
     private authS: AuthService,
   ) {}
 
-  ngOnInit() {
-    console.log()
-  }
-
   signIn() {
-    const { email, password } = this.formLogin.getRawValue()
-    const data = {
-      email: email as string,
-      password: password as string,
+    const sendData = {
+      ...this.formLogin.getRawValue(),
     }
 
     this.formLogin.markAsPending()
-    this.authS.logIn(data).subscribe({
+    this.authS.logIn(sendData).subscribe({
       error: () => this.formLogin.setErrors({ invalidCredential: true }),
     })
   }
