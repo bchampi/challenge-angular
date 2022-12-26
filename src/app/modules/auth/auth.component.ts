@@ -4,6 +4,8 @@ import {
 } from '@angular/forms'
 import { AuthService } from 'src/app/core/services/Auth.service'
 import { validControlCustomInput } from 'src/app/utils/functions'
+import { CookieService } from 'ngx-cookie-service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-auth',
@@ -19,6 +21,15 @@ export class AuthComponent {
 
   validControl = validControlCustomInput
 
+  constructor(
+    private fb: NonNullableFormBuilder,
+    private cookieS: CookieService,
+    private router: Router,
+    private authS: AuthService,
+  ) {
+    if (this.cookieS.check('token')) this.router.navigate(['/home'])
+  }
+
   get emailControl() {
     return this.formLogin.get('email') as AbstractControl
   }
@@ -26,11 +37,6 @@ export class AuthComponent {
   get passwordControl() {
     return this.formLogin.get('password') as AbstractControl
   }
-
-  constructor(
-    private fb: NonNullableFormBuilder,
-    private authS: AuthService,
-  ) {}
 
   signIn() {
     const sendData = {

@@ -4,12 +4,16 @@ import {
 } from '@angular/router'
 import { Observable } from 'rxjs'
 import Swal from 'sweetalert2'
+import { CookieService } from 'ngx-cookie-service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private cookieS: CookieService,
+  ) {}
 
   private isUserLoggedIn(flag: boolean) {
     if (!flag) {
@@ -24,15 +28,16 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   canActivateChild(): Observable<boolean | UrlTree> | boolean | UrlTree {
     // Consultar al servidor si el token existe y validar
-    const token = !!(localStorage.getItem('token'))
-    this.isUserLoggedIn(token)
-    return token
+    // const token = !!(localStorage.getItem('token'))
+    const cookie = this.cookieS.check('token')
+    this.isUserLoggedIn(cookie)
+    return cookie
   }
 
   canLoad(): Observable<boolean | UrlTree> | boolean | UrlTree {
     // Consultar al servidor si el token existe y validar
-    const token = !!(localStorage.getItem('token'))
-    this.isUserLoggedIn(token)
-    return token
+    const cookie = this.cookieS.check('token')
+    this.isUserLoggedIn(cookie)
+    return cookie
   }
 }

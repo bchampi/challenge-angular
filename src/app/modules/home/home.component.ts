@@ -1,4 +1,5 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { CookieService } from 'ngx-cookie-service'
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,12 @@ import { Component } from '@angular/core'
   styleUrls: ['./home.component.scss'],
 })
 
-export class HomeComponent {
-  // constructor() { }
+export class HomeComponent implements OnInit {
+  constructor(private cookie: CookieService) { }
 
-  get getToken() {
-    return !!localStorage.getItem('token')
+  isTokenValid: boolean = false
+
+  ngOnInit(): void {
+    this.isTokenValid = this.cookie.check('token')
   }
 }

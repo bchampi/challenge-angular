@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatDialogModule } from '@angular/material/dialog'
+import { CookieService } from 'ngx-cookie-service'
 import { AppComponent } from './app.component'
 import { AppRoutingModule } from './app-routing.module'
 import { FormDialogComponent } from './core/components/form-dialog/form-dialog.component'
@@ -15,7 +16,7 @@ import { ToolbarComponent } from './core/components/toolbar/toolbar.component'
     AppComponent,
     FormDialogComponent,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
