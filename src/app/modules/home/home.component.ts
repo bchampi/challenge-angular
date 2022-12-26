@@ -9,7 +9,7 @@ import { Component } from '@angular/core'
 export class HomeComponent {
   // constructor() { }
 
-  getToken() {
+  get getToken() {
     return !!localStorage.getItem('token')
   }
 }
