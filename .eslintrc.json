@@ -22,6 +22,7 @@
       ],
       "rules": {
         "@typescript-eslint/semi": ["error", "never"],
+        "linebreak-style": "off",
         "import/prefer-default-export": "off",
         "no-console": "off",
         "class-methods-use-this": "off",
@@ -59,7 +60,8 @@
       "excludedFiles": ["*inline-template-*.component.html"],
       "extends": ["plugin:prettier/recommended"],
       "rules": {
-        "prettier/prettier": ["error", { "parser": "angular" }]
+        "prettier/prettier": ["error", { "parser": "angular" }],
+        "linebreak-style": "off"
       }
     }
   ]
